@@ -38,4 +38,24 @@ public class DatabaseService {
             }
             return rs;
         }
+
+    /**
+     * Insert a single entry into the database. Returns the id of the record.
+     * @param query
+     * @return
+     */
+    public static int post(String query) {
+        int id = -1;
+        try {
+            PreparedStatement st = DatabaseService.getConnection().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            st.execute();
+            ResultSet rs = st.getGeneratedKeys();
+            while(rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Post is going wrong!");
+        }
+        return id;
+    }
 }

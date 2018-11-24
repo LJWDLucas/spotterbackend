@@ -1,7 +1,4 @@
 package com.spotter.backend.controllers;
 
-
-public class SubmissionController {
-
-
+public class TestSubmissionController {
 }
