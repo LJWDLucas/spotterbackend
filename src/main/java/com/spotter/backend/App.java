@@ -1,5 +1,5 @@
 package com.spotter.backend;
-import com.spotter.backend.resources.Routes;
+import com.spotter.backend.services.Routes;
 import org.apache.log4j.BasicConfigurator;
 
 /**

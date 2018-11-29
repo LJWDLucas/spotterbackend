@@ -8,15 +8,13 @@ import java.util.Base64;
 public class Submission extends Post {
     private Base64 encodedImage;
     private String url;
-    private String descrption;
-    private String submitter;
+    private String description;
     private long longitude;
     private long latitude;
 
-    public Submission(String identifier) {
-        super(identifier);
+    public Submission(int id, int numberOfLikes, int userId, String text) {
+        super(id, numberOfLikes, userId, text);
     }
-
 
     public Base64 getEncodedImage() {
         return encodedImage;
@@ -34,19 +32,11 @@ public class Submission extends Post {
         this.url = url;
     }
 
-    public String getDescrption() {
-        return descrption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrption(String descrption) {
-        this.descrption = descrption;
-    }
-
-    public String getSubmitter() {
-        return submitter;
-    }
-
-    public void setSubmitter(String submitter) {
-        this.submitter = submitter;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

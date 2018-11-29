@@ -15,7 +15,8 @@ public class CompetitionController {
                     rs.getInt("id"),
                     rs.getString("description"),
                     rs.getInt("enabled"),
-                    rs.getInt("userId")
+                    rs.getInt("userId"),
+                    rs.getInt("numberOfLikes")
             );
         } catch(Exception e) {
             System.out.println("Couldn't create a competition object.");
@@ -30,7 +31,8 @@ public class CompetitionController {
                         rs.getInt("id"),
                         rs.getString("description"),
                         rs.getInt("enabled"),
-                        rs.getInt("userId")
+                        rs.getInt("userId"),
+                        rs.getInt("numberOfLikes")
                 );
                 cList.add(competition);
             }

@@ -19,8 +19,9 @@ class CompetitionControllerTest {
         Mockito.when(rs.getString("description")).thenReturn("This is a test.");
         Mockito.when(rs.getInt("enabled")).thenReturn(0);
         Mockito.when(rs.getInt("userId")).thenReturn(1);
+        Mockito.when(rs.getInt("numberOfLikes")).thenReturn(0);
 
-        Competition c = new Competition(1, "This is a test.", 0, 1);
+        Competition c = new Competition(1, "This is a test.", 0, 1, 0);
 
         CompetitionController cc = new CompetitionController();
         Competition testC = cc.createCompetition(rs);

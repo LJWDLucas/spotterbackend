@@ -11,6 +11,7 @@ public class Competition {
     private int userId;
     private String description;
     private boolean enabled;
+    private int numberOfLikes;
     private ArrayList<Reward> rewards = new ArrayList<>();
     private ArrayList<Post> posts = new ArrayList<>();
 
@@ -18,7 +19,7 @@ public class Competition {
         this.id = id;
     }
 
-    public Competition(int id, String description, int enabled, int userId) {
+    public Competition(int id, String description, int enabled, int userId, int numberOfLikes) {
         this.id = id;
         this.description = description;
         this.userId = userId;
@@ -28,6 +29,7 @@ public class Competition {
         } else {
             this.enabled = false;
         }
+        this.numberOfLikes = numberOfLikes;
     }
 
     public int getUserId() {
@@ -82,6 +84,14 @@ public class Competition {
         this.posts = posts;
     }
 
+    public int getNumberOfLikes() {
+        return numberOfLikes;
+    }
+
+    public void setNumberOfLikes(int numberOfLikes) {
+        this.numberOfLikes = numberOfLikes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof Competition) {
@@ -89,7 +99,8 @@ public class Competition {
             return (c.getId() == getId()) &&
                     (c.getDescription() == getDescription()) &&
                     (c.getEnabled() == getEnabled()) &&
-                    (c.getUserId() == getUserId());
+                    (c.getUserId() == getUserId()) &&
+                    (c.getNumberOfLikes() == getNumberOfLikes());
         }
         return false;
     }
