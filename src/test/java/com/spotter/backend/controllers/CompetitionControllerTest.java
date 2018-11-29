@@ -1,14 +1,15 @@
 package com.spotter.backend.controllers;
 
 import com.spotter.backend.models.Competition;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CompetitionControllerTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class CompetitionControllerTest {
 
     @Test
     public void testCreateCompetition() throws SQLException {
@@ -23,6 +24,6 @@ public class CompetitionControllerTest {
 
         CompetitionController cc = new CompetitionController();
         Competition testC = cc.createCompetition(rs);
-        Assert.assertEquals(c, testC);
+        assertEquals(c, testC);
     }
 }

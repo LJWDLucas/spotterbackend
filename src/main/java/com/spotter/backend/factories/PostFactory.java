@@ -4,11 +4,12 @@ import com.spotter.backend.models.Comment;
 import com.spotter.backend.models.Post;
 import com.spotter.backend.models.Submission;
 
-public class EntryFactory {
-    public Post getEntry(String entryType, String identifier) {
-        if (entryType == "Submission") {
+public class PostFactory
+{
+    public Post getPost(String postType, String identifier) {
+        if (postType == "Submission") {
             return new Submission(identifier);
-        } else if (entryType == "Comment"){
+        } else if (postType == "Comment"){
             return new Comment(identifier);
         }
         return null;

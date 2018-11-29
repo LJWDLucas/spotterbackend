@@ -23,13 +23,12 @@ import static spark.Spark.post;
 
 public class Routes {
     private Mapper mapper = new Mapper();
+    private Crud crud = new Crud();
 
     public Routes() {
         // *-*-*-ALL GETTERS-*-*-* \\
         get("/competition/:id", (req, res) -> {
-            CompetitionController competitionController = new CompetitionController();
-            ResultSet rs = DatabaseService.get("SELECT * FROM competitions WHERE id = " + req.params(":id"));
-//            Competition c = competitionController.createCompetition(rs);
+            ResultSet rs = crud.getCompetition(req.params(":id"));
             String s = mapper.getObjectMapper().writeValueAsString(rs);
             res.type("application/json");
             return s;
@@ -40,8 +39,8 @@ public class Routes {
         );
 
         get("/competitions", (req, res) -> {
+            ResultSet rs = crud.getAllCompetitions();
             CompetitionController competitionController = new CompetitionController();
-            ResultSet rs = DatabaseService.get("SELECT * FROM competitions");
             ArrayList<Competition> cList = competitionController.createCompetitionList(rs);
             String s = mapper.getObjectMapper().writeValueAsString(cList);
             res.type("application/json");

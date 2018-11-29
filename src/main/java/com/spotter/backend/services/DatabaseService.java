@@ -33,7 +33,6 @@ public class DatabaseService {
                 st.execute();
                 rs = st.getResultSet();
             } catch (SQLException e) {
-                // System.out.println(e.getMessage());
                 System.out.println("Get is going wrong!");
             }
             return rs;
