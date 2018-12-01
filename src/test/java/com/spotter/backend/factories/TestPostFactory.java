@@ -27,22 +27,22 @@ class TestPostFactory {
         testmap.put("text", new MapValue("Test"));
         testmap.put("numberOfLikes", new MapValue(0));
     }
-
-    @Test
-    public void getSubmissionTest() {
-        Post submission = factory.getPost("Submission", testmap, null);
-        assertTrue(submission instanceof Submission);
-    }
-
-    @Test
-    public void getCommentTest() {
-        Post comment = factory.getPost("Comment", testmap, "Submission");
-        assertTrue(comment instanceof Comment);
-    }
-
-    @Test
-    public void returnNoObject() {
-        Post thisIsNull = factory.getPost("random", testmap, null);
-        assertNull(thisIsNull);
-    }
+//
+//    @Test
+//    public void getSubmissionTest() {
+//        Post submission = factory.getPost("Submission", testmap, null);
+//        assertTrue(submission instanceof Submission);
+//    }
+//
+//    @Test
+//    public void getCommentTest() {
+//        Post comment = factory.getPost("Comment", testmap, "Submission");
+//        assertTrue(comment instanceof Comment);
+//    }
+//
+//    @Test
+//    public void returnNoObject() {
+//        Post thisIsNull = factory.getPost("random", testmap, null);
+//        assertNull(thisIsNull);
+//    }
 }

@@ -6,42 +6,45 @@ public class Post {
     private int userId;
     private String text;
 
-    public Post(int id, int numberOfLikes, int userId, String text) {
+    protected Post(int id,int userId, String text,  int numberOfLikes) {
         this.id = id;
         this.numberOfLikes = numberOfLikes;
         this.userId = userId;
         this.text = text;
     }
 
-    public int getId() {
+    protected Post(int userId, String text, int numberOfLikes) {
+        this.numberOfLikes = numberOfLikes;
+        this.userId = userId;
+        this.text = text;
+    }
+
+    protected int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 
-    public int getNumberOfLikes() {
+    protected int getNumberOfLikes() {
         return numberOfLikes;
     }
 
-    public void setNumberOfLikes(int numberOfLikes) {
+    protected void setNumberOfLikes(int numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
-    public int getUserId() {
+    protected int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    protected void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getText() {
+    protected String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
 }

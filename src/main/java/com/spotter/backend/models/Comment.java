@@ -4,8 +4,8 @@ public class Comment extends Post {
     private int typeOfId;
     private String typeOf;
 
-    public Comment(int id, int numberOfLikes, int userId, String text, int typeOfId, String typeOf) {
-        super(id, numberOfLikes, userId, text);
+    public Comment(int commentId, int userId, String text, int numberOfLikes, int typeOfId, String typeOf) {
+        super(commentId, userId, text, numberOfLikes);
         this.typeOfId = typeOfId;
         this.typeOf = typeOf;
     }

@@ -6,99 +6,71 @@ import java.util.ArrayList;
 /**
  * Mind that the database stores a boolean as an integer. Don't forget to map bool to int before inserting!
  */
-public class Competition {
-    private int id;
-    private int userId;
-    private String description;
+public class Competition extends Post {
+    private String name;
     private boolean enabled;
-    private int numberOfLikes;
     private ArrayList<Reward> rewards = new ArrayList<>();
-    private ArrayList<Post> posts = new ArrayList<>();
 
-    public Competition(int id) {
-        this.id = id;
+    public Competition(int id, int userId, String name, String description, boolean enabled, int numberOfLikes) {
+        super(id, userId, description, numberOfLikes);
+        this.enabled = enabled;
+        this.name = name;
     }
 
-    public Competition(int id, String description, int enabled, int userId, int numberOfLikes) {
-        this.id = id;
-        this.description = description;
-        this.userId = userId;
-        // Database stores true as 1 and false as 0.
-        if (enabled == 1) {
-            this.enabled = true;
-        } else {
-            this.enabled = false;
-        }
-        this.numberOfLikes = numberOfLikes;
+    public Competition(int userId, String name, String description, boolean enabled,  int numberOfLikes) {
+        super(userId, description, numberOfLikes);
+        this.enabled = enabled;
+        this.name = name;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public String getName() {
+        return name;
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public ArrayList<Reward> getRewards() {
         return rewards;
     }
 
-    public void setRewards( ArrayList<Reward> rewards) {
+    public void setRewards(ArrayList<Reward> rewards) {
         this.rewards = rewards;
     }
 
-    public ArrayList<Post> getPosts() {
-        return posts;
+    @Override
+    public void setId(int id) {
+        super.setId(id);
     }
 
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
+    @Override
+    public int getId() {
+        return super.getId();
     }
 
+    @Override
     public int getNumberOfLikes() {
-        return numberOfLikes;
+        return super.getNumberOfLikes();
     }
 
-    public void setNumberOfLikes(int numberOfLikes) {
-        this.numberOfLikes = numberOfLikes;
+    @Override
+    public int getUserId() {
+        return super.getUserId();
+    }
+
+    @Override
+    public String getText() {
+        return super.getText();
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof Competition) {
-            Competition c = (Competition) o;
+            Post c = (Competition) o;
             return (c.getId() == getId()) &&
-                    (c.getDescription() == getDescription()) &&
-                    (c.getEnabled() == getEnabled()) &&
+                    (c.getText() == getText()) &&
+                    (((Competition) c).isEnabled() == isEnabled()) &&
                     (c.getUserId() == getUserId()) &&
                     (c.getNumberOfLikes() == getNumberOfLikes());
         }

@@ -1,44 +1,29 @@
 package com.spotter.backend.controllers;
 
-import com.spotter.backend.models.Competition;
-
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import com.spotter.backend.templates.CompetitionTemplate;
+import com.spotter.backend.templates.GenericTemplate;
+import spark.Request;
 
 public class CompetitionController {
-    private ArrayList<Competition> cList = new ArrayList<>();
+    private GenericTemplate template = new CompetitionTemplate();
 
-    public Competition createCompetition(ResultSet rs) {
-        Competition competition = null;
-        try {
-            competition = new Competition(
-                    rs.getInt("id"),
-                    rs.getString("description"),
-                    rs.getInt("enabled"),
-                    rs.getInt("userId"),
-                    rs.getInt("numberOfLikes")
-            );
-        } catch(Exception e) {
-            System.out.println("Couldn't create a competition object.");
-        }
-        return competition;
+    public String retrieveOne(Request request) {
+        return template.retrieveFromDatabase(request);
     }
 
-    public ArrayList createCompetitionList(ResultSet rs) {
-        try {
-            while(rs.next()) {
-                Competition competition = new Competition(
-                        rs.getInt("id"),
-                        rs.getString("description"),
-                        rs.getInt("enabled"),
-                        rs.getInt("userId"),
-                        rs.getInt("numberOfLikes")
-                );
-                cList.add(competition);
-            }
-        } catch(Exception e) {
-            System.out.println("Couldn't create a competition list.");
-        }
-        return cList;
+    public String retrieveAll() {
+        return template.retrieveAllFromDatabase();
+    }
+
+    public String post(String body) {
+        return template.addToDatabase(body);
+    }
+
+    public String delete(Request request) {
+        return template.deleteFromDatabase(request);
+    }
+
+    public String update(String body) {
+        return template.updateInDatabase(body);
     }
 }

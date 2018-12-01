@@ -9,35 +9,35 @@ import java.util.Map;
 
 public class PostFactory
 {
-    public Post getPost(String postType, Map<String, MapValue> map, String commentOnType) {
-        if (postType == "Submission") {
-            return new Submission(
-                    map.get("id").getInteger(),
-                    map.get("numberOfLikes").getInteger(),
-                    map.get("userId").getInteger(),
-                    map.get("description").getString()
-            );
-        } else if (postType == "Comment"){
-            if (commentOnType == "Submission") {
-                return new Comment(
-                        map.get("id").getInteger(),
-                        map.get("numberOfLikes").getInteger(),
-                        map.get("userId").getInteger(),
-                        map.get("comment").getString(),
-                        map.get("submissionId").getInteger(),
-                        "Submission"
-                );
-            } else {
-                return new Comment(
-                        map.get("id").getInteger(),
-                        map.get("numberOfLikes").getInteger(),
-                        map.get("userId").getInteger(),
-                        map.get("comment").getString(),
-                        map.get("competitionId").getInteger(),
-                        "Competition"
-                );
-            }
-        }
-        return null;
-    }
+//    public Post getPost(String postType, Map<String, MapValue> map, String commentOnType) {
+//        if (postType == "Submission") {
+//            return new Submission(
+//                    map.get("id").getInteger(),
+//                    map.get("numberOfLikes").getInteger(),
+//                    map.get("userId").getInteger(),
+//                    map.get("description").getString()
+//            );
+//        } else if (postType == "Comment"){
+//            if (commentOnType == "Submission") {
+//                return new Comment(
+//                        map.get("id").getInteger(),
+//                        map.get("numberOfLikes").getInteger(),
+//                        map.get("userId").getInteger(),
+//                        map.get("comment").getString(),
+//                        map.get("submissionId").getInteger(),
+//                        "Submission"
+//                );
+//            } else {
+//                return new Comment(
+//                        map.get("id").getInteger(),
+//                        map.get("numberOfLikes").getInteger(),
+//                        map.get("userId").getInteger(),
+//                        map.get("comment").getString(),
+//                        map.get("competitionId").getInteger(),
+//                        "Competition"
+//                );
+//            }
+//        }
+//        return null;
+//    }
 }

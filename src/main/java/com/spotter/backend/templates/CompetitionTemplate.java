@@ -1,43 +1,37 @@
 package com.spotter.backend.templates;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.spotter.backend.controllers.CompetitionController;
-import com.spotter.backend.services.Crud;
-import com.spotter.backend.services.Mapper;
-import com.spotter.backend.utilities.GenericTemplate;
+import com.spotter.backend.models.Competition;
+import com.spotter.backend.models.Post;
+import com.spotter.backend.services.CrudCompetition;
 import spark.Request;
 
-import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class CompetitionTemplate extends GenericTemplate {
-    private Crud crud = new Crud();
-    private Mapper mapper = new Mapper();
-    private CompetitionController cc =
+    private CrudCompetition crud = new CrudCompetition();
 
     @Override
-    public String constructJson(String body, int idInDatabase) {
-        return null;
+    public Competition postData(String body) {
+        return crud.post(body);
     }
 
     @Override
-    public String constructJson(ResultSet rs) {
-        String json = "";
-        try {
-            json = mapper.mapCompetition(rs);
-        } catch (JsonProcessingException jpe) {
-            System.out.println(jpe);
-        }
-        return json;
+    public Competition getData(Request req) {
+        return crud.get(Integer.parseInt(req.params("id")));
     }
 
     @Override
-    public int postData(String body) {
-        return 0;
+    public ArrayList<Post> getAllData() {
+        return crud.getAll();
     }
 
     @Override
-    public ResultSet getData(Request req) {
-        return crud.getCompetition(req.params("id"));
+    public Competition updateData(String body) {
+        return crud.update(body);
     }
 
+    @Override
+    protected boolean deleteData(Request req) {
+        return crud.delete(Integer.parseInt(req.params("id")));
+    }
 }
