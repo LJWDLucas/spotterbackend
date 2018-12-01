@@ -23,16 +23,18 @@ public class PostFactory
                         map.get("id").getInteger(),
                         map.get("numberOfLikes").getInteger(),
                         map.get("userId").getInteger(),
-                        map.get("text").getString(),
-                        map.get("submissionId").getInteger()
+                        map.get("comment").getString(),
+                        map.get("submissionId").getInteger(),
+                        "Submission"
                 );
             } else {
                 return new Comment(
                         map.get("id").getInteger(),
                         map.get("numberOfLikes").getInteger(),
                         map.get("userId").getInteger(),
-                        map.get("text").getString(),
-                        map.get("competitionId").getInteger()
+                        map.get("comment").getString(),
+                        map.get("competitionId").getInteger(),
+                        "Competition"
                 );
             }
         }

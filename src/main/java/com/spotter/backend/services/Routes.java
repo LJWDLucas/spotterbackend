@@ -1,10 +1,13 @@
 package com.spotter.backend.services;
-import com.spotter.backend.services.Mapper;
 import static spark.Spark.*;
+import static spark.route.HttpMethod.put;
 
 public class Routes {
     private Mapper mapper = new Mapper();
 
+    /**
+     * Contains all routes.
+     */
     public Routes() {
         // Removes the need to set content type for each response.
         before((req, res) -> {
@@ -14,19 +17,21 @@ public class Routes {
         // *-*-*-ALL GETTERS-*-*-* \\
         get("/competition/:id", (req, res) -> mapper.getCompetition(req.params(":id")));
 
-        get("/competition/:id/comments", (req, res) ->
-                "TO DO " + req.params(":id") + " probably has no comments anyway."
-        );
+        get("/competition/:id/comments", (req, res) -> mapper.getAllCompetitionComments(req.params(":id")));
 
         get("/competitions", (req, res) -> mapper.getAllCompetitions());
 
         // *-*-*-ALL POSTS-*-*-* \\
-        post("competition/:id/comment", (req, res) -> mapper.postCompetitionComment(req.params(":id")));
+        post("/competition/comment", (req, res) -> mapper.postComment(req.body(), "competitionComments", "competitionId"));
 
-        post("submit", (req, res) -> mapper.postImageToImgUr(req.body()));
+        post("/submission/submit", (req, res) -> mapper.postImageToImgUr(req.body()));
 
         // *-*-*-ALL PUTS-*-*-* \\
+        put("/competition/comment", (req, res) -> mapper.updateComment(req.body(), "Competition"));
+
+        put("/submission/comment", (req, res) -> mapper.updateComment(req.body(), "Submission"));
 
 
+        // *-*-*-ALL DELETES-*-*-* \\
     }
 }

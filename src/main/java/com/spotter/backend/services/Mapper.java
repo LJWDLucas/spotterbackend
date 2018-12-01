@@ -9,6 +9,8 @@ import com.spotter.backend.controllers.PostController;
 import com.spotter.backend.factories.PostFactory;
 import com.spotter.backend.models.Competition;
 import com.spotter.backend.models.Imgur;
+import com.spotter.backend.models.Post;
+import com.spotter.backend.utilities.MapValue;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -21,6 +23,9 @@ import static java.util.stream.Collectors.joining;
 public class Mapper {
     private ObjectMapper objectMapper = new ObjectMapper();
     private Crud crud = new Crud();
+    private CompetitionController cc = new CompetitionController();
+    private PostController postController = new PostController();
+    private JsonBuilder jsonBuilder = new JsonBuilder();
 
     public Mapper() {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -38,25 +43,34 @@ public class Mapper {
     //TO DO: error handling
     public String getCompetition(String id) throws JsonProcessingException {
         ResultSet rs = crud.getCompetition(id);
-        return objectMapper.writeValueAsString(rs);
+        return objectMapper.writeValueAsString(cc.createCompetition(rs));
     }
 
     public String getAllCompetitions() throws JsonProcessingException {
         ResultSet rs = crud.getAllCompetitions();
-        CompetitionController competitionController = new CompetitionController();
-        ArrayList<Competition> cList = competitionController.createCompetitionList(rs);
+        ArrayList<Competition> cList = cc.createCompetitionList(rs);
         return objectMapper.writeValueAsString(cList);
     }
 
     public String getAllCompetitionComments(String id) throws JsonProcessingException {
         ResultSet rs = crud.getCompetitionComments(id);
-        PostController postController = new PostController();
-        ArrayList<Competition> cList = postController.createPostList(rs, "Comment", "Competition");
+        ArrayList<Post> cList = postController.createPostList(rs, "Comment", "Competition");
         return objectMapper.writeValueAsString(cList);
     }
 
-    public String postCompetitionComment(String compeitionId) {
-        return "s";
+    public String postComment(String body, String tableName, String targetIdColumnName) throws Exception {
+        String targetId = getPropertyValueAsString(body, "targetId");
+        String userId = getPropertyValueAsString(body, "userId");
+        String comment = getPropertyValueAsString(body, "comment");
+        int id = crud.postComment(userId, comment, tableName, targetIdColumnName, targetId);
+        Map<String, MapValue> map = new HashMap<>();
+        map.put("userId", new MapValue(Integer.parseInt(userId)));
+        map.put("comment", new MapValue(comment));
+        // Target id is either the submissionId or the competitionId, depending on which route let to this function.
+        map.put("targetId", new MapValue(Integer.parseInt(targetId)));
+        map.put("id", new MapValue(id));
+        map.put("numberOfLikes", new MapValue(0));
+        return objectMapper.writeValueAsString(jsonBuilder.commentJsonBuilder(map));
     };
 
     public String postImageToImgUr(String body) throws Exception {
@@ -97,5 +111,31 @@ public class Mapper {
                 .build();
 
         return objectMapper.writeValueAsString(imgur);
+    }
+
+    /**
+     * Returns -1, 0 or 1. -1 = failure. 0 = nothing updated, 1 = row updated.
+     * @param body
+     * @param type
+     * @return
+     * @throws Exception
+     */
+
+    public String updateComment(String body, String type) throws Exception {
+        int result;
+        String comment = getPropertyValueAsString(body,"comment");
+        String commentId = getPropertyValueAsString(body, "commentId");
+        String userId = getPropertyValueAsString(body, "userId");
+        if (type == "Submission") {
+            result = crud.updateSubmissionComment(commentId, comment);
+        } else {
+            result = crud.updateCompetitionComment(commentId, comment);
+        }
+        Map<String, MapValue> map = new HashMap<>();
+        map.put("result", new MapValue(result));
+        map.put("comment", new MapValue(comment));
+        map.put("commentId", new MapValue(commentId));
+        map.put("userId", new MapValue(userId));
+        return objectMapper.writeValueAsString(map);
     }
 }

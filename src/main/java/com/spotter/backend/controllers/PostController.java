@@ -15,16 +15,16 @@ public class PostController {
     private ArrayList<Post> pList = new ArrayList<>();
 
     public ArrayList createPostList(ResultSet rs, String type, String commentOnType) {
-        try {
-            switch(type) {
-                case "Submission":
-                    return pList;
-                case "Comment":
-                    while(rs.next()) {
+        switch(type) {
+            case "Submission":
+                break;
+            case "Comment":
+                try {
+                    while (rs.next()) {
                         Map<String, MapValue> map = new HashMap<>();
                         Post comment;
                         map.put("id", new MapValue(rs.getInt("id")));
-                        map.put("description", new MapValue(rs.getString("description")));
+                        map.put("comment", new MapValue(rs.getString("comment")));
                         map.put("userId", new MapValue(rs.getInt("userId")));
                         map.put("numberOfLikes", new MapValue(rs.getInt("numberOfLikes")));
                         if (commentOnType == "Competition") {
@@ -36,12 +36,12 @@ public class PostController {
                         }
                         pList.add(comment);
                     }
-                    return pList;
-                default:
-                    return pList;
-            }
-        } catch(Exception e) {
-            System.out.println("Couldn't create a post list.");
+                } catch (Exception e) {
+                    System.out.println("Couldn't create a post list.");
+                }
+                break;
+            default:
+                break;
         }
         return pList;
     }

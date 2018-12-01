@@ -3,22 +3,22 @@ package com.spotter.backend.services;
 import java.sql.*;
 
 public class DatabaseService {
-        private static Connection connect = null;
+    private static Connection connect = null;
 
-        public static Connection getConnection() {
-            if (connect != null) {
-                return connect;
-            }
-            try {
-                String url = "jdbc:sqlite:/Users/dannylucas/Spotter.db";
-                connect = DriverManager.getConnection(url);
-                System.out.println("it worked");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+    public static Connection getConnection() {
+        if (connect != null) {
             return connect;
         }
+        try {
+            String url = "jdbc:sqlite:/Users/dannylucas/Spotter.db";
+            connect = DriverManager.getConnection(url);
+            System.out.println("it worked");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return connect;
+    }
 
     /**
      * Default get method.
@@ -56,5 +56,18 @@ public class DatabaseService {
             System.out.println("Post is going wrong!");
         }
         return id;
+    }
+
+    public static int update(String query, String id, String comment) {
+        try {
+            PreparedStatement st = DatabaseService.getConnection().prepareStatement(query);
+            st.setString(1, comment);
+            st.setInt(2, Integer.parseInt(id));
+            st.execute();
+            return st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Update is going wrong!");
+        }
+        return -1;
     }
 }
