@@ -10,6 +10,8 @@ import com.spotter.backend.factories.PostFactory;
 import com.spotter.backend.models.Competition;
 import com.spotter.backend.models.Imgur;
 import com.spotter.backend.models.Post;
+import com.spotter.backend.templates.CompetitionTemplate;
+import com.spotter.backend.utilities.GenericTemplate;
 import com.spotter.backend.utilities.MapValue;
 
 import java.io.IOException;
@@ -36,27 +38,64 @@ public class Mapper {
         return j.get(property).asText();
     }
 
-    public ObjectMapper getObjectMapper() {
-        return objectMapper;
-    }
-
     //TO DO: error handling
-    public String getCompetition(String id) throws JsonProcessingException {
-        ResultSet rs = crud.getCompetition(id);
-        return objectMapper.writeValueAsString(cc.createCompetition(rs));
+
+//    /**
+//     * Return one competition record
+//     * @param id CompetitionId
+//     * @return
+//     * @throws JsonProcessingException
+//     */
+//    public String getCompetition(String id) throws JsonProcessingException {
+//        HashMap<String, MapValue> map = new HashMap<>();
+//        map.put("id", new MapValue(id));
+//        GenericTemplate gn = new CompetitionTemplate();
+//        return gn.retrieveFromDatabase(map);
+//    }
+
+    /**
+     * TO DO: how the fuck do you handle errors?!
+     * @return
+     * @throws JsonProcessingException  Is caught and handled further down the method chain.
+     */
+    public String mapCompetition(Competition comp) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(comp);
     }
 
+    public String mapCompetitions(ArrayList<Competition> cList) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(cList);
+    }
+    /**
+     * Returns all competitions
+     * @return
+     * @throws JsonProcessingException
+     */
     public String getAllCompetitions() throws JsonProcessingException {
         ResultSet rs = crud.getAllCompetitions();
         ArrayList<Competition> cList = cc.createCompetitionList(rs);
         return objectMapper.writeValueAsString(cList);
     }
 
+    /**
+     *
+     * @param id Competition Id
+     * @return
+     * @throws JsonProcessingException
+     */
     public String getAllCompetitionComments(String id) throws JsonProcessingException {
         ResultSet rs = crud.getCompetitionComments(id);
         ArrayList<Post> cList = postController.createPostList(rs, "Comment", "Competition");
         return objectMapper.writeValueAsString(cList);
     }
+
+    public String getAllCompetitionSubmissions(String id) {
+        return "to do";
+    }
+
+    public String getAllCompetitionSubmissionComments(String competitionId, String submissionId) {
+        return "to do";
+    }
+
 
     public String postComment(String body, String tableName, String targetIdColumnName) throws Exception {
         String targetId = getPropertyValueAsString(body, "targetId");
