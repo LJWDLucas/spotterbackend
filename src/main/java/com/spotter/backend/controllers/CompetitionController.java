@@ -4,7 +4,7 @@ import com.spotter.backend.templates.CompetitionTemplate;
 import com.spotter.backend.templates.GenericTemplate;
 import spark.Request;
 
-public class CompetitionController {
+public class CompetitionController implements PostController{
     private GenericTemplate template = new CompetitionTemplate();
 
     public String retrieveOne(Request request) {

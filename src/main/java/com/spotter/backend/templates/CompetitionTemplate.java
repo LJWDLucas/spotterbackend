@@ -34,4 +34,13 @@ public class CompetitionTemplate extends GenericTemplate {
     protected boolean deleteData(Request req) {
         return crud.delete(Integer.parseInt(req.params("id")));
     }
+
+    /**
+     * No implementation required.
+     * @return null
+     */
+    @Override
+    protected ArrayList<Post> getAllDataById(Request req) {
+        return null;
+    }
 }

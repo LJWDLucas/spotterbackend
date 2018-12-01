@@ -18,7 +18,6 @@ public class CrudCompetition implements Crud {
     private final String deleteCompetitionQuery = "DELETE FROM competitions WHERE id = ?";
     private final String postCompetitionQuery = "INSERT INTO competitions(description, enabled, userId, name, numberOfLikes) VALUES(?, ?, ?, ? ,?)";
     private DatabaseService db = new DatabaseService();
-    private Extractor extractor = new Extractor();
 
     public Competition get(int id) {
         Competition competition = null;
@@ -71,13 +70,34 @@ public class CrudCompetition implements Crud {
         return cList;
     }
 
+    /**
+     * No implementation required.
+     * @param id
+     * @return null;
+     */
+    @Override
+    public ArrayList<?> getAllById(int id) {
+        return null;
+    }
+
+    /**
+     * No implementation required.
+     * @param post
+     * @return
+     */
+    @Override
+    public Post post(Post post) {
+        return null;
+    }
+
+    @Override
     public Competition post(String body) {
         Competition competition = null;
         try (
                 Connection con = db.getConnection();
                 PreparedStatement ps = con.prepareStatement(postCompetitionQuery, PreparedStatement.RETURN_GENERATED_KEYS)
             )   {
-                    competition = extractor.extractCompetition(body);
+                    competition = Extractor.getInstance().extractCompetition(body);
                     ps.setString(1, competition.getText());
                     ps.setInt(2, competition.isEnabled() ? 1 : 0);
                     ps.setInt(3, competition.getUserId());
@@ -109,8 +129,8 @@ public class CrudCompetition implements Crud {
                 Connection con = db.getConnection();
                 PreparedStatement ps = con.prepareStatement(updateCompetitionQuery)
             )   {
-                    competition = extractor.extractCompetition(body);
-                    competition.setId(Integer.parseInt(extractor.getPropertyValueAsString(body, "competitionId")));
+                    competition = Extractor.getInstance().extractCompetition(body);
+                    competition.setId(Integer.parseInt(Extractor.getInstance().getPropertyValueAsString(body, "competitionId")));
                     ps.setString(1, competition.getText());
                     ps.setInt(2, competition.isEnabled() ? 1 : 0);
                     ps.setString(3, competition.getName());

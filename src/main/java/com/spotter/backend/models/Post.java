@@ -19,7 +19,18 @@ public class Post {
         this.text = text;
     }
 
-    protected int getId() {
+    public Post(int id, int userId, String text) {
+        this.id = id;
+        this.userId = userId;
+        this.text = text;
+    }
+
+    protected Post(int userId, String text) {
+        this.userId = userId;
+        this.text = text;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -27,7 +38,7 @@ public class Post {
         this.id = id;
     }
 
-    protected int getNumberOfLikes() {
+    public int getNumberOfLikes() {
         return numberOfLikes;
     }
 
@@ -35,7 +46,7 @@ public class Post {
         this.numberOfLikes = numberOfLikes;
     }
 
-    protected int getUserId() {
+    public int getUserId() {
         return userId;
     }
 
@@ -43,8 +54,9 @@ public class Post {
         this.userId = userId;
     }
 
-    protected String getText() {
+    public String getText() {
         return text;
     }
+
 
 }

@@ -2,7 +2,6 @@ package com.spotter.backend.services;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -10,7 +9,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 
-public class Calls {
+public class ExternalCalls {
     CloseableHttpClient httpclient = HttpClients.createDefault();
 
     public String postToImgUr(String body) throws Exception {

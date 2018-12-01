@@ -29,6 +29,10 @@ public abstract class GenericTemplate {
         return constructJson(pList);
     }
 
+    public final String retrieveAllFromDataBaseById(Request req) {
+        ArrayList<Post> pList = getAllDataById(req);
+        return constructJson(pList);
+    }
     /**
      * Add subclass to database and return the Json string.
      * @param body
@@ -71,6 +75,7 @@ public abstract class GenericTemplate {
     }
 
     protected abstract ArrayList<Post> getAllData();
+    protected abstract ArrayList<Post> getAllDataById(Request req);
     protected abstract Post getData(Request req);
     protected abstract Post postData(String body);
     protected abstract Post updateData(String body);
