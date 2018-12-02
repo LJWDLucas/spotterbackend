@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CrudCompetitionComment implements Crud {
-    private final String getAllCommentsForCompetitionQuery = "SELECT * FROM competitionsComment WHERE competitionId = ?";
-    private final String updateCompetitionCommentQuery = "UPDATE competitionsComment SET comment = ? WHERE id = ?";
-    private final String deleteCompetitionCommentQuery = "DELETE FROM competitionsComment WHERE id = ?";
-    private final String postCompetitionCommentQuery = "INSERT INTO competitionsComment(userId, competitionId, comment) VALUES(?, ?, ?)";
+    private final String getAllCommentsForCompetitionQuery = "SELECT * FROM competitionComments WHERE competitionId = ?";
+    private final String updateCompetitionCommentQuery = "UPDATE competitionComments SET comment = ? WHERE id = ?";
+    private final String deleteCompetitionCommentQuery = "DELETE FROM competitionComments WHERE id = ?";
+    private final String postCompetitionCommentQuery = "INSERT INTO competitionComments(userId, competitionId, comment) VALUES(?, ?, ?)";
     private DatabaseService db = new DatabaseService();
 
     @Override
@@ -47,13 +47,14 @@ public class CrudCompetitionComment implements Crud {
                             rs.getInt("id"),
                             rs.getInt("userId"),
                             rs.getString("text"),
-                            rs.getInt("flexId")
+                            rs.getInt("competitionId")
                     );
                     cList.add(comment);
                 }
             }
         } catch (SQLException se) {
             // do stuff
+            System.out.println(se);
         }
         return cList;
     }
@@ -68,7 +69,7 @@ public class CrudCompetitionComment implements Crud {
             comment = Extractor.getInstance().extractComment(body);
             ps.setInt(1, comment.getUserId());
             ps.setInt(2, comment.getFlexId());
-            ps.setInt(3, comment.getUserId());
+            ps.setString(3, comment.getText());
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 while (rs.next()) {
@@ -80,6 +81,8 @@ public class CrudCompetitionComment implements Crud {
             }
         } catch (SQLException sql) {
             //  to do
+            System.out.println(sql);
+
             System.out.println(sql);
         } catch (IOException io) {
             //  to do
