@@ -10,6 +10,8 @@ public interface PostController {
 
     String retrieveAll();
 
+    String retrieveAll(Request request);
+
     String post(String body);
 
     String delete(Request request);

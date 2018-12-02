@@ -2,9 +2,7 @@ package com.spotter.backend.services;
 
 import com.spotter.backend.models.Post;
 import com.spotter.backend.models.Submission;
-import com.spotter.backend.utilities.Extractor;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

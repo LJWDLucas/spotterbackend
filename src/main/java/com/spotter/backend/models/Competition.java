@@ -40,31 +40,6 @@ public class Competition extends Post {
     }
 
     @Override
-    public void setId(int id) {
-        super.setId(id);
-    }
-
-    @Override
-    public int getId() {
-        return super.getId();
-    }
-
-    @Override
-    public int getNumberOfLikes() {
-        return super.getNumberOfLikes();
-    }
-
-    @Override
-    public int getUserId() {
-        return super.getUserId();
-    }
-
-    @Override
-    public String getText() {
-        return super.getText();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (o instanceof Competition) {
             Post c = (Competition) o;

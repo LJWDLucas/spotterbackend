@@ -26,4 +26,8 @@ public class CompetitionController implements PostController{
     public String update(String body) {
         return template.updateInDatabase(body);
     }
+
+    public String retrieveAll(Request request) {
+        return null;
+    }
 }

@@ -1,53 +1,58 @@
 package com.spotter.backend.services;
+import com.spotter.backend.controllers.CompetitionCommentController;
 import com.spotter.backend.controllers.CompetitionController;
+import com.spotter.backend.controllers.SubmissionCommentController;
 import com.spotter.backend.controllers.SubmissionController;
-import com.spotter.backend.utilities.Mapper;
 
 import static spark.Spark.*;
 
 public class Routes {
-    private Mapper mapper = new Mapper();
     private CompetitionController cC = new CompetitionController();
     private SubmissionController sC = new SubmissionController();
-    /**
-     * Contains all routes.
-     */
+    private CompetitionCommentController cCC = new CompetitionCommentController();
+    private SubmissionCommentController sCC = new SubmissionCommentController();
+
     public Routes() {
         // Removes the need to set content type for each response.
         before((req, res) -> {
             res.type("application/json");
         });
 
+        // Routes for Competitions \\
         get("/competitions", (req, res) -> cC.retrieveAll());
 
         get("/competition/:id", (req, res) -> cC.retrieveOne(req));
 
-//        get("/competition/:id/comments", (req, res) -> mapper.getAllCompetitionComments(req.params(":id")));
-
-        get("/competition/:id/submissions", (req, res) -> sC.retrieveAll(req));
-
-        /**
-         * Currently not implemented.
-         */
-        get("/competition/:id/submission/:submissionId", (req, res) -> sC.retrieveOne(req));
-
-//        get("competition/:competitionId/submission/:submissionId/comments", (req, res) -> mapper.getAllCompetitionSubmissionComments());
-
         post("/competition", (req, res) -> cC.post(req.body()));
-
-//        post("/competition/comment", (req, res) -> mapper.postComment(req.body(), "competitionComments", "competitionId"));
-//
-
-        post("/competition/submission", (req, res) -> sC.post(req.body()));
 
         put("/competition", (req, res) -> cC.update(req.body()));
 
-//        put("/competition/comment", (req, res) -> mapper.updateComment(req.body(), "Competition"));
-//
-//        put("/submission/comment", (req, res) -> mapper.updateComment(req.body(), "Submission"));
-
         delete("/competition/:id", (req, res) -> cC.delete(req));
 
+        // Routes for Submissions \\
+        get("/competition/:id/submissions", (req, res) -> sC.retrieveAll(req));
+
+        post("/competition/submission", (req, res) -> sC.post(req.body()));
+
         delete("/competition/submissions/:id", (req, res) -> sC.delete(req));
+
+        // Routes for Comments on Competitions \\
+        get("/competition/:id/comments", (req, res) -> cCC.retrieveAll(req));
+
+        post("/competition/comment", (req, res) -> cCC.post(req.body()));
+
+        put("/competition/comment", (req, res) -> cCC.update(req.body()));
+
+        delete("/competition/comment/:id", (req, res) -> cCC.delete(req));
+
+        // Routes for Comments on Submissions \\
+        get("competition/:id/submission/:submissionId/comments", (req, res) -> sCC.retrieveAll(req));
+
+        post("competition/submission/comments", (req, res) -> sCC.post(req.body()));
+
+        put("/competition/submission/comment", (req, res) -> sCC.update(req.body()));
+
+        delete("/competition/submission/comment/:id", (req, res) -> sCC.delete(req));
+
     }
 }

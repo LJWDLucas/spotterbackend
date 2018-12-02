@@ -1,30 +1,33 @@
 package com.spotter.backend.controllers;
 
+import com.spotter.backend.templates.CompetitionTemplate;
+import com.spotter.backend.templates.GenericTemplate;
 import spark.Request;
 
 public class SubmissionCommentController implements PostController {
-    @Override
+    private GenericTemplate template = new CompetitionTemplate();
+
     public String retrieveOne(Request request) {
-        return null;
+        return template.retrieveFromDatabase(request);
     }
 
-    @Override
     public String retrieveAll() {
-        return null;
+        return template.retrieveAllFromDatabase();
     }
 
-    @Override
     public String post(String body) {
-        return null;
+        return template.addToDatabase(body);
     }
 
-    @Override
     public String delete(Request request) {
-        return null;
+        return template.deleteFromDatabase(request);
     }
 
-    @Override
     public String update(String body) {
+        return template.updateInDatabase(body);
+    }
+
+    public String retrieveAll(Request request) {
         return null;
     }
 }

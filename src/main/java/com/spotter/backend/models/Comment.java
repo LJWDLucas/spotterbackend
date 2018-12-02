@@ -1,20 +1,33 @@
 package com.spotter.backend.models;
 
 public class Comment extends Post {
-    private int typeOfId;
-    private String typeOf;
+    private int flexId;
 
-    public Comment(int commentId, int userId, String text, int numberOfLikes, int typeOfId, String typeOf) {
-        super(commentId, userId, text, numberOfLikes);
-        this.typeOfId = typeOfId;
-        this.typeOf = typeOf;
+    public Comment(int commentId, int userId, String comment, int flexId) {
+        super(commentId, userId, comment);
+        this.flexId = flexId;
     }
 
-    public int gettypeOfId() {
-        return typeOfId;
+    public Comment(int userId, String comment, int flexId) {
+        super(userId, comment);
+        this.flexId = flexId;
     }
 
-    public String getTypeOf() {
-        return typeOf;
+    public int getFlexId() {
+        return flexId;
+    }
+
+    public void setFlexId(int flexId) {
+        this.flexId = flexId;
+    }
+
+    @Override
+    public void setNumberOfLikes(int numberOfLikes) {
+        super.setNumberOfLikes(numberOfLikes);
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
     }
 }

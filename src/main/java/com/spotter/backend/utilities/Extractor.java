@@ -2,6 +2,7 @@ package com.spotter.backend.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spotter.backend.models.Comment;
 import com.spotter.backend.models.Competition;
 import com.spotter.backend.models.Submission;
 
@@ -24,7 +25,7 @@ public class Extractor {
     }
 
     public Competition extractCompetition(String body) throws IOException {
-        String description = getPropertyValueAsString(body, "text");
+        String description = getPropertyValueAsString(body, "description");
         String name = getPropertyValueAsString(body, "name");
         int userId = Integer.parseInt(getPropertyValueAsString(body, "userId"));
         int numberOfLikes = Integer.parseInt(getPropertyValueAsString(body, "numberOfLikes"));
@@ -39,5 +40,13 @@ public class Extractor {
         String longitude = getPropertyValueAsString(body, "longitude");
         String latitude = getPropertyValueAsString(body, "latitude");
         return new Submission(userId, competitionId, description, longitude, latitude);
+    }
+
+    public Comment extractComment(String body) throws IOException {
+        int userId = Integer.parseInt(getPropertyValueAsString(body, "userId"));
+        String comment = getPropertyValueAsString(body, "comment");
+        int flexId = Integer.parseInt(getPropertyValueAsString(body, "flexId"));
+
+        return new Comment(userId, comment, flexId);
     }
 }

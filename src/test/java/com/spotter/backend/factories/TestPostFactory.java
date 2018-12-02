@@ -1,15 +1,5 @@
 package com.spotter.backend.factories;
 
-import com.spotter.backend.models.Comment;
-import com.spotter.backend.models.Post;
-import com.spotter.backend.models.Submission;
-import com.spotter.backend.utilities.MapValue;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

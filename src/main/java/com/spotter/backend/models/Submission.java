@@ -30,9 +30,6 @@ public class Submission extends Post {
         this.latitude = latitude;
     }
 
-    @Override
-    public void setId(int i) { super.setId(i);}
-
     public void setUrl(String url) {
         this.url = url;
     }
@@ -63,11 +60,6 @@ public class Submission extends Post {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
-    }
-
-    @Override
-    public void setNumberOfLikes(int i) {
-        super.setNumberOfLikes(i);
     }
 
     public int getCompetitionId() {

@@ -34,7 +34,7 @@ public class Post {
         return id;
     }
 
-    protected void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class Post {
         return numberOfLikes;
     }
 
-    protected void setNumberOfLikes(int numberOfLikes) {
+    public void setNumberOfLikes(int numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
@@ -50,7 +50,7 @@ public class Post {
         return userId;
     }
 
-    protected void setUserId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

@@ -1,8 +1,12 @@
 package com.spotter.backend.controllers;
 
+import com.spotter.backend.templates.CompetitionCommentTemplate;
+import com.spotter.backend.templates.GenericTemplate;
 import spark.Request;
 
 public class CompetitionCommentController implements PostController {
+    private GenericTemplate template = new CompetitionCommentTemplate();
+
     @Override
     public String retrieveOne(Request request) {
         return null;
@@ -15,16 +19,21 @@ public class CompetitionCommentController implements PostController {
 
     @Override
     public String post(String body) {
-        return null;
+        return template.addToDatabase(body);
     }
 
     @Override
     public String delete(Request request) {
-        return null;
+        return template.deleteFromDatabase(request);
     }
 
     @Override
     public String update(String body) {
-        return null;
+        return template.updateInDatabase(body);
+    }
+
+    @Override
+    public String retrieveAll(Request request) {
+        return template.retrieveAllFromDataBaseById(request);
     }
 }
