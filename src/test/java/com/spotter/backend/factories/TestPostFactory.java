@@ -14,19 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestPostFactory {
-    PostFactory factory = new PostFactory();
-    Map<String, MapValue> testmap = new HashMap<>();
-
-    @BeforeEach
-    public void initialize() {
-        testmap.put("id", new MapValue(1));
-        testmap.put("userId", new MapValue(1));
-        testmap.put("submissionId", new MapValue(1));
-        testmap.put("competitionId", new MapValue(1));
-        testmap.put("description", new MapValue("Test"));
-        testmap.put("text", new MapValue("Test"));
-        testmap.put("numberOfLikes", new MapValue(0));
-    }
+//    PostFactory factory = new PostFactory();
+//    Map<String, MapValue> testmap = new HashMap<>();
+//
+//    @BeforeEach
+//    public void initialize() {
+//        testmap.put("id", new MapValue(1));
+//        testmap.put("userId", new MapValue(1));
+//        testmap.put("submissionId", new MapValue(1));
+//        testmap.put("competitionId", new MapValue(1));
+//        testmap.put("description", new MapValue("Test"));
+//        testmap.put("text", new MapValue("Test"));
+//        testmap.put("numberOfLikes", new MapValue(0));
+//    }
 //
 //    @Test
 //    public void getSubmissionTest() {

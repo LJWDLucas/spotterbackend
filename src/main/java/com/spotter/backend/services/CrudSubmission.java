@@ -14,8 +14,7 @@ import java.util.ArrayList;
 public class CrudSubmission implements Crud {
     private final String getAllSubmissionsByIdQuery = "SELECT * FROM submissions WHERE competitionId = ?";
     private final String deleteSubmissionQuery = "DELETE FROM submissions WHERE id = ?";
-    private final String postSubmissionQuery = "INSERT INTO submissions(competitionId, userId, imgurId, link, deleteHash, numberOfLikes, longitude, latitude) " +
-            "VALUES(?, ?, ?, ? ,?, ?, ?, ?)";
+    private final String postSubmissionQuery = "INSERT INTO submissions(competitionId, userId, imgurId, url, deleteHash, numberOfLikes, longitude, latitude) VALUES(?, ?, ?, ? ,?, ?, ?, ?)";
     private DatabaseService db = new DatabaseService();
 
     @Override

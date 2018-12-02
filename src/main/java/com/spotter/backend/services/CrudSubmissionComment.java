@@ -11,7 +11,7 @@ public class CrudSubmissionComment implements Crud {
     }
 
     @Override
-    public Post post(String body, Post post) {
+    public Post post(Post post) {
         return null;
     }
 

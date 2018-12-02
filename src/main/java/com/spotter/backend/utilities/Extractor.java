@@ -32,7 +32,6 @@ public class Extractor {
         return new Competition(userId, name, description, enabled == 1, numberOfLikes);
     }
 
-    //int userId, int competitionId, String text, String longitude, String latitude
     public Submission extractSubmission(String body) throws IOException {
         int userId = Integer.parseInt(getPropertyValueAsString(body, "userId"));
         int competitionId = Integer.parseInt(getPropertyValueAsString(body, "competitionId"));

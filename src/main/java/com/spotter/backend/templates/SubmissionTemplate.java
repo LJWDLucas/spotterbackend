@@ -41,6 +41,9 @@ public class SubmissionTemplate extends GenericTemplate {
             submission.setNumberOfLikes(0);
         } catch (Exception e) {
             // handle
+            System.out.println(
+
+            );
         }
         return crud.post(submission);
     }

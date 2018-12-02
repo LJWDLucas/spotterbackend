@@ -18,8 +18,6 @@ public class Routes {
             res.type("application/json");
         });
 
-        // *-*-*-ALL GETTERS-*-*-* \\
-
         get("/competitions", (req, res) -> cC.retrieveAll());
 
         get("/competition/:id", (req, res) -> cC.retrieveOne(req));
@@ -35,32 +33,21 @@ public class Routes {
 
 //        get("competition/:competitionId/submission/:submissionId/comments", (req, res) -> mapper.getAllCompetitionSubmissionComments());
 
-        // *-*-*-ALL POSTS-*-*-* \\
         post("/competition", (req, res) -> cC.post(req.body()));
 
 //        post("/competition/comment", (req, res) -> mapper.postComment(req.body(), "competitionComments", "competitionId"));
 //
 
-        /**
-         * Note that :id is ignored. The body should contain all relevant information.
-         */
-        post("/competition/:id/submission", (req, res) -> sC.post(req.body()));
+        post("/competition/submission", (req, res) -> sC.post(req.body()));
 
-        // *-*-*-ALL PUTS-*-*-* \\
         put("/competition", (req, res) -> cC.update(req.body()));
 
 //        put("/competition/comment", (req, res) -> mapper.updateComment(req.body(), "Competition"));
 //
 //        put("/submission/comment", (req, res) -> mapper.updateComment(req.body(), "Submission"));
 
-
-        // *-*-*-ALL DELETES-*-*-* \\
-
         delete("/competition/:id", (req, res) -> cC.delete(req));
 
-        /**
-         * Note that :id is ignored.
-         */
-        delete("/competition/:id/submission/:submissionId", (req, res) -> sC.delete(req));
+        delete("/competition/submissions/:id", (req, res) -> sC.delete(req));
     }
 }

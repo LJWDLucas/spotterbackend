@@ -11,6 +11,11 @@ public class CrudCompetitionComment implements Crud {
     }
 
     @Override
+    public Post post(Post post) {
+        return null;
+    }
+
+    @Override
     public ArrayList<?> getAll() {
         return null;
     }
