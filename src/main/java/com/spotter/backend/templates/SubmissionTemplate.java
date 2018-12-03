@@ -8,11 +8,8 @@ import com.spotter.backend.models.Submission;
 import com.spotter.backend.services.CrudSubmission;
 import com.spotter.backend.services.ExternalCalls;
 import com.spotter.backend.utilities.Extractor;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import spark.Request;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SubmissionTemplate extends GenericTemplate {
@@ -24,6 +21,7 @@ public class SubmissionTemplate extends GenericTemplate {
     protected ArrayList<Post> getAllDataById(Request req) {
         return crud.getAllById(Integer.parseInt(req.params("id")));
     }
+
     @Override
     public Submission postData(String body) {
         Submission submission = null;

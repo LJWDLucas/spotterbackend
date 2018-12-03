@@ -1,11 +1,11 @@
 package com.spotter.backend.controllers;
 
-import com.spotter.backend.templates.CompetitionTemplate;
 import com.spotter.backend.templates.GenericTemplate;
+import com.spotter.backend.templates.SubmissionCommentTemplate;
 import spark.Request;
 
 public class SubmissionCommentController implements PostController {
-    private GenericTemplate template = new CompetitionTemplate();
+    private GenericTemplate template = new SubmissionCommentTemplate();
 
     public String retrieveOne(Request request) {
         return template.retrieveFromDatabase(request);
