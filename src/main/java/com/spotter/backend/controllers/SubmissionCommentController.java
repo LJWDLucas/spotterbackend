@@ -28,6 +28,6 @@ public class SubmissionCommentController implements PostController {
     }
 
     public String retrieveAll(Request request) {
-        return null;
+        return template.retrieveAllFromDataBaseById(request);
     }
 }

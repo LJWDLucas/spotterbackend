@@ -16,8 +16,7 @@ public class SubmissionCommentTemplate extends GenericTemplate {
 
     @Override
     protected ArrayList<Post> getAllDataById(Request req) {
-        // requires different implementation
-        return null;
+        return crud.getAllById(Integer.parseInt(req.params( "submissionId")));
     }
 
     @Override

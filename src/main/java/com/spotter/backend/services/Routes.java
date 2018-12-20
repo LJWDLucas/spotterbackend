@@ -46,9 +46,9 @@ public class Routes {
         delete("/competition/comment/:id", (req, res) -> cCC.delete(req));
 
         // Routes for Comments on Submissions \\
-        get("competition/:id/submission/:submissionId/comments", (req, res) -> sCC.retrieveAll(req));
+        get("/competition/:id/submission/:submissionId/comments", (req, res) -> sCC.retrieveAll(req));
 
-        post("competition/submission/comments", (req, res) -> sCC.post(req.body()));
+        post("/competition/submission/comment", (req, res) -> sCC.post(req.body()));
 
         put("/competition/submission/comment", (req, res) -> sCC.update(req.body()));
 

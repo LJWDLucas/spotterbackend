@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CrudSubmissionComment implements Crud {
-    private final String getAllCommentsForSubmissionQuery = "SELECT * FROM submissionComments WHERE competitionId = ?";
+    private final String getAllCommentsForSubmissionQuery = "SELECT * FROM submissionComments WHERE submissionId = ?";
     private final String updateSubmissionCommentQuery = "UPDATE submissionComments SET comment = ? WHERE id = ?";
     private final String deleteSubmissionCommentQuery = "DELETE FROM submissionComments WHERE id = ?";
     private final String postSubmissionCommentQuery = "INSERT INTO submissionComments(userId, submissionId, comment) VALUES(?, ?, ?)";
@@ -46,7 +46,7 @@ public class CrudSubmissionComment implements Crud {
                     Comment comment = new Comment(
                             rs.getInt("id"),
                             rs.getInt("userId"),
-                            rs.getString("text"),
+                            rs.getString("comment"),
                             rs.getInt("submissionId")
                     );
                     cList.add(comment);
@@ -125,4 +125,6 @@ public class CrudSubmissionComment implements Crud {
         }
         return comment;
     }
+
+
 }
