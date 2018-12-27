@@ -1,8 +1,5 @@
 package com.spotter.backend.services;
-import com.spotter.backend.controllers.CompetitionCommentController;
-import com.spotter.backend.controllers.CompetitionController;
-import com.spotter.backend.controllers.SubmissionCommentController;
-import com.spotter.backend.controllers.SubmissionController;
+import com.spotter.backend.controllers.*;
 
 import static spark.Spark.*;
 
@@ -11,6 +8,7 @@ public class Routes {
     private SubmissionController sC = new SubmissionController();
     private CompetitionCommentController cCC = new CompetitionCommentController();
     private SubmissionCommentController sCC = new SubmissionCommentController();
+    private LikeController likeController = new LikeController();
 
     public Routes() {
         // Removes the need to set content type for each response.
@@ -54,5 +52,13 @@ public class Routes {
 
         delete("/competition/submission/comment/:id", (req, res) -> sCC.delete(req));
 
+        // Routes for Likes \\
+        get("/like/:userId/:type/:typeId", (req, res) -> likeController.getLike(req));
+
+        get("/total/:type/:typeId", (req, res) -> likeController.getTotalLikes(req));
+
+        post("/like/:type", (req, res) -> likeController.postLike(req));
+
+        put("/like/:type", (req, res) -> likeController.updateLike(req));
     }
 }

@@ -2,6 +2,7 @@ package com.spotter.backend.utilities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spotter.backend.models.Like;
 import com.spotter.backend.models.Comment;
 import com.spotter.backend.models.Competition;
 import com.spotter.backend.models.Submission;
@@ -22,6 +23,13 @@ public class Extractor {
     public String getPropertyValueAsString(String body, String property) throws IOException {
         JsonNode j = objectMapper.readTree(body);
         return j.get(property).asText();
+    }
+
+    public Like extractLike(String body) throws IOException {
+        int userId = Integer.parseInt(getPropertyValueAsString(body, "userId"));
+        int typeId = Integer.parseInt(getPropertyValueAsString(body, "typeId"));
+        int like = Integer.parseInt(getPropertyValueAsString(body, "likes"));
+        return new Like(userId, typeId, like);
     }
 
     public Competition extractCompetition(String body) throws IOException {

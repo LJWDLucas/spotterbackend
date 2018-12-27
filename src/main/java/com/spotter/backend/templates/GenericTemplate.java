@@ -62,7 +62,7 @@ public abstract class GenericTemplate {
      */
     public final String deleteFromDatabase(Request req) {
         boolean wasSuccessful = deleteData(req);
-        return builder.wasSuccessful(wasSuccessful);
+        return builder.valueToJson(wasSuccessful, "wasSuccessful");
     }
 
     /**
