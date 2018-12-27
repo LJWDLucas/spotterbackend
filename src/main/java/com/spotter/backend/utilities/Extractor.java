@@ -25,7 +25,7 @@ public class Extractor {
     }
 
     public Competition extractCompetition(String body) throws IOException {
-        String description = getPropertyValueAsString(body, "description");
+        String description = getPropertyValueAsString(body, "text");
         String name = getPropertyValueAsString(body, "name");
         int userId = Integer.parseInt(getPropertyValueAsString(body, "userId"));
         int numberOfLikes = Integer.parseInt(getPropertyValueAsString(body, "numberOfLikes"));
