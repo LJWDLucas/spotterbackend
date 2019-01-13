@@ -9,12 +9,18 @@ public class Routes {
     private CompetitionCommentController cCC = new CompetitionCommentController();
     private SubmissionCommentController sCC = new SubmissionCommentController();
     private LikeController likeController = new LikeController();
+    private LoginController loginController = new LoginController();
 
     public Routes() {
         // Removes the need to set content type for each response.
         before((req, res) -> {
             res.type("application/json");
         });
+
+        // Account \\
+        post("/login", (req, res) -> loginController.login(req));
+
+        post("/user", (req, res) -> loginController.createUser(req));
 
         // Routes for Competitions \\
         get("/competitions", (req, res) -> cC.retrieveAll());

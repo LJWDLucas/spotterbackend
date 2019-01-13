@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.spotter.backend.models.Like;
 import com.spotter.backend.models.Post;
+import com.spotter.backend.models.User;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class JsonBuilder {
             result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pList);
         } catch (JsonProcessingException jpe) {
             // handle
+            System.out.println(jpe);
         }
         return result;
     }
@@ -40,8 +42,20 @@ public class JsonBuilder {
             result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(like);
         } catch (JsonProcessingException jpe) {
             // handle
+            System.out.println(jpe);
         }
         return result;
+    }
+
+    public String mapToJson(User user) {
+        String result = "";
+        try {
+            result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+        } catch (JsonProcessingException jpe) {
+            System.out.println(jpe);
+        }
+        return result;
+
     }
 
     private String toJson(JsonNode rootNode) {
