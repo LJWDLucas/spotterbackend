@@ -78,7 +78,7 @@ public class CrudLogin {
                     return rs2.getInt(1);
                 }
             }
-        }catch (SQLException se) {
+        } catch (SQLException se) {
             System.out.println(se);
         }
 
