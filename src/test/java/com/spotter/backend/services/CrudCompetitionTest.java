@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.mockito.Mock;
+import spark.utils.Assert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,9 +37,9 @@ public class CrudCompetitionTest {
         Mockito.when(db.getConnection()).thenReturn(c);
     }
 
-    @Test
-    public void testGetCompetition(){
-
-    }
+//    @Test
+//    public void testGetCompetition(){
+//        Assert.isTrue(true,"True");
+//    }
 
 }
