@@ -2,5 +2,6 @@
 build:
   docker:
     web: Dockerfile
-run:
-  web: docker run -d -p 4567:4567 spotter
+release:
+  command:
+    - docker run -d -p 4567:4567 spotter
