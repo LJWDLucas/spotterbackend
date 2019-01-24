@@ -10,5 +10,3 @@ WORKDIR /opt
 
 # start on run
 CMD ["java", "-jar", "/opt/binaries/spotter-backend-1.0-SNAPSHOT-jar-with-dependencies.jar"]
-
-RUN docker run -p 4567:4567 spotter

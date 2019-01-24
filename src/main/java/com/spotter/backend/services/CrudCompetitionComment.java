@@ -46,7 +46,7 @@ public class CrudCompetitionComment implements Crud {
                     Comment comment = new Comment(
                             rs.getInt("id"),
                             rs.getInt("userId"),
-                            rs.getString("text"),
+                            rs.getString("comment"),
                             rs.getInt("competitionId")
                     );
                     cList.add(comment);
